@@ -14,3 +14,22 @@ class Candidate(models.Model):
     class Meta:
         verbose_name = 'Cadidato'
         verbose_name_plural = 'Candidatos'
+
+    def is_front(self):
+        if self.html >= 7 and self.css >= 7 and self.javascript >= 7:
+            return True
+        else:
+            return False
+
+    def is_back(self):
+        if self.python >= 7 and self.django >= 7:
+            return True
+        else:
+            return False
+
+    def is_mobile(self):
+        if self.ios >= 7 and self.android >= 7:
+            return True
+        else:
+            return False
+

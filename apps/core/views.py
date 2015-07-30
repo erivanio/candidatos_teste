@@ -19,20 +19,16 @@ class CandidateCreateView(CreateView):
         content_back = 'Obrigado por se candidatar, assim que tivermos uma vaga disponível para programador Back-End entraremos em contato.'
         content_mobile = 'Obrigado por se candidatar, assim que tivermos uma vaga disponível para programador Mobile entraremos em contato.'
         content_generic= 'Obrigado por se candidatar, assim que tivermos uma vaga disponível para programador entraremos em contato.'
-        flag = False
-        if candidate.html >= 7 and candidate.css >= 7 and candidate.javascript >= 7:
+        if candidate.is_front():
             email = EmailMessage(subject, content_front, to=[candidate.email])
             email.send()
-            flag = True
-        if candidate.python >= 7 and candidate.django >= 7:
+        if candidate.is_back():
             email = EmailMessage(subject, content_back, to=[candidate.email])
             email.send()
-            flag = True
-        if candidate.ios >= 7 and candidate.android >= 7:
+        if candidate.is_mobile():
             email = EmailMessage(subject, content_mobile, to=[candidate.email])
             email.send()
-            flag = True
-        if not flag:
+        if not candidate.is_front() and not candidate.is_back() and not candidate.is_mobile():
             email = EmailMessage(subject, content_generic, to=[candidate.email])
             email.send()
         messages.success(self.request, 'Candidato cadastrado com sucesso!')
