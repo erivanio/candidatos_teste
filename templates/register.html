@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Cadastro de Candidato</title>
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+<form method="post" action="{% url 'candidate_register' %}">
+    {% csrf_token %}
+    <h3>Dados do Candidato:</h3>
+    <p>{{ form.name.label }}: {{ form.name }}</p>
+    <p>{{ form.email.label }}: {{ form.email }}</p>
+    <h3>Avalie seu conhecimento de 0 a 10 nos seguintes itens::</h3>
+    <p>{{ form.html.label }}: {{ form.html }}</p>
+    <p>{{ form.css.label }}: {{ form.css }}</p>
+    <p>{{ form.javascript.label }}: {{ form.javascript }}</p>
+    <p>{{ form.python.label }}: {{ form.python }}</p>
+    <p>{{ form.django.label }}: {{ form.django }}</p>
+    <p>{{ form.ios.label }}: {{ form.ios }}</p>
+    <p>{{ form.android.label }}: {{ form.android }}</p>
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>
